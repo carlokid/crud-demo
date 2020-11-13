@@ -36,12 +36,6 @@ public class DemoController {
 	@Autowired
 	StatisticsService statisticsService;
 
-	/**
-	 * Retrieve all continents
-	 * 
-	 * @param
-	 * @return List<Continent>
-	 */
 	@GetMapping("/continents")
 	public ResponseEntity<List<Continent>> getAllContinents() {
 		List<Continent> list = continentService.getAllContinents();

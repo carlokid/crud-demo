@@ -1,0 +1,30 @@
+DROP TABLE IF EXISTS TBL_CONTINENT;
+CREATE TABLE TBL_CONTINENT (
+  code char(2) NOT NULL PRIMARY KEY,
+  name varchar(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS TBL_COUNTRIES;
+CREATE TABLE TBL_COUNTRIES (
+  id INT PRIMARY KEY,
+  code char(2) NOT NULL,
+  name varchar(64) NOT NULL,
+  full_name varchar(128) NOT NULL,
+  iso3 char(3) NOT NULL,
+  number int(3) NOT NULL,
+  continent_code char(2) NOT NULL,
+  display_order int(3) NOT NULL DEFAULT '900',
+  PRIMARY KEY (id),
+  CONSTRAINT tbl_countries_1 FOREIGN KEY (continent_code) REFERENCES TBL_CONTINENT (code) ON UPDATE CASCADE
+);
+
+DROP TABLE IF EXISTS TBL_STATISTICS;
+CREATE TABLE TBL_STATISTICS (
+  id INT auto_increment PRIMARY KEY,
+  country_id INT NOT NULL,
+  active_cases INT DEFAULT 0,
+  confirmed INT DEFAULT 0,
+  recovered INT DEFAULT 0,
+  death INT DEFAULT 0,
+  CONSTRAINT tbl_statistics_1 FOREIGN KEY (country_id) REFERENCES TBL_COUNTRIES (id) ON UPDATE CASCADE
+);
